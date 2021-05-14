@@ -106,10 +106,13 @@ func (r *adoptionReconciler) reconcile(req ctrlrt.Request) error {
 		return ackerr.ResourceManagerFactoryNotFound
 	}
 
+	ackrtlog.InfoAdoptedResource(r.log, res, "Meghna: Before If Block")
 	if !rmf.IsAdoptable() {
 		// TODO(RedbackThomson): Place into terminal state + condition
+		ackrtlog.InfoAdoptedResource(r.log, res, "Meghna: Check ok, entered if")
 		return ackerr.NotAdoptable
 	}
+	ackrtlog.InfoAdoptedResource(r.log, res, "Meghna: After If Block")
 
 	targetDescriptor := rmf.ResourceDescriptor()
 	acctID := r.getOwnerAccountID(res)
